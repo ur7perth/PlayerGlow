@@ -88,9 +88,8 @@ public class PlayerListScreen extends Screen {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta); // يرسم الخلفية والأزرار
-
+    public void renderBackground(context);
+super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 15, 0xFFFFFF);
 
         if (players.isEmpty()) {
