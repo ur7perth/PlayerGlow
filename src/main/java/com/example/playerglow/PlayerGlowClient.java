@@ -1,4 +1,4 @@
-Enterpackage com.example.playerglow;
+package com.example.playerglow;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
