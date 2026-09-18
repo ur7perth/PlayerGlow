@@ -1,4 +1,4 @@
-Enterpackage com.example.playerglow.mixin;
+package com.example.playerglow.mixin;
 
 import com.example.playerglow.GlowManager;
 import net.minecraft.entity.Entity;
