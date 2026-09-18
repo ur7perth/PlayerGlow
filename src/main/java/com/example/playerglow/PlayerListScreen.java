@@ -6,6 +6,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -31,7 +32,7 @@ public class PlayerListScreen extends Screen {
             for (PlayerListEntry entry : handler.getPlayerList()) {
                 if (client.player != null
                         && entry.getProfile().getId().equals(client.player.getUuid())) {
-                    continue;
+                    continue; // تجاهل نفسك
                 }
                 players.add(entry);
             }
@@ -43,24 +44,8 @@ public class PlayerListScreen extends Screen {
 
         int w = 200;
         int x = width / 2 - w / 2;
+        int y = 40;
 
-        // ===== صف الألوان =====
-        int py = 30;
-        for (int i = 0; i < GlowManager.COLORS.length; i++) {
-            final int color = GlowManager.COLORS[i];
-            boolean selected = GlowManager.selectedColor == color;
-
-            Text label = Text.literal(selected ? "[■]" : "■")
-                    .styled(s -> s.withColor(color));
-
-            addDrawableChild(ButtonWidget.builder(label, b -> {
-                GlowManager.selectedColor = color;
-                clearAndInit();
-            }).dimensions(x + 5 + i * 24, py, 22, 20).build());
-        }
-
-        // ===== قائمة اللاعبين =====
-        int y = 58;
         int start = page * PER_PAGE;
         int end = Math.min(start + PER_PAGE, players.size());
 
@@ -70,16 +55,11 @@ public class PlayerListScreen extends Screen {
             String name = entry.getProfile().getName();
             boolean on = GlowManager.isTracked(id);
 
-            Text label;
-            if (on) {
-                int c = GlowManager.getColor(id);
-                label = Text.literal("■ " + name).styled(s -> s.withColor(c));
-            } else {
-                label = Text.literal(name);
-            }
+            Text label = Text.literal((on ? "✔ " : "") + name)
+                    .formatted(on ? Formatting.GREEN : Formatting.WHITE);
 
             addDrawableChild(ButtonWidget.builder(label, b -> {
-                GlowManager.apply(id);
+                GlowManager.toggle(id);
                 clearAndInit();
             }).dimensions(x, y + (i - start) * 24, w, 20).build());
         }
@@ -109,13 +89,13 @@ public class PlayerListScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta); // يرسم الخلفية والأزرار
 
-        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 12, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, 15, 0xFFFFFF);
 
         if (players.isEmpty()) {
             context.drawCenteredTextWithShadow(textRenderer,
-                    Text.literal("No other players online"), width / 2, 80, 0xAAAAAA);
+                    Text.literal("No other players online"), width / 2, 60, 0xAAAAAA);
         }
     }
 
