@@ -1,0 +1,12 @@
+Enter{
+  "required": true,
+  "package": "com.example.playerglow.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MinecraftClientMixin",
+    "EntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
