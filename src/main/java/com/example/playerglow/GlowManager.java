@@ -1,4 +1,4 @@
-Enterpackage com.example.playerglow;
+package com.example.playerglow;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
