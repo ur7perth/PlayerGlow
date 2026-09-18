@@ -14,7 +14,7 @@ public abstract class EntityMixin {
     @Inject(method = "getTeamColorValue", at = @At("HEAD"), cancellable = true)
     private void playerglow$color(CallbackInfoReturnable<Integer> cir) {
         if ((Object) this instanceof PlayerEntity p && GlowManager.isTracked(p.getUuid())) {
-            cir.setReturnValue(GlowManager.GLOW_COLOR);
+            cir.setReturnValue(GlowManager.getColor(p.getUuid()));
         }
     }
 }
