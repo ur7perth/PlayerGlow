@@ -1,0 +1,22 @@
+Enter{
+  "schemaVersion": 1,
+  "id": "playerglow",
+  "version": "${version}",
+  "name": "Player Glow",
+  "description": "Open a menu, pick a player, and highlight them with a glow only when visible.",
+  "authors": ["YourName"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.example.playerglow.PlayerGlowClient"]
+  },
+  "mixins": [
+    { "config": "playerglow.mixins.json", "environment": "client" }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
